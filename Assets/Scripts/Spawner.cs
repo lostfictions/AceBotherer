@@ -34,11 +34,12 @@ public class Spawner : MonoBehaviour
 
 		propTimer = propDelay;
 
-		for(int i=-6; i<35; i++)
+		// for(int i=-6; i<35; i++)
+		for(int i=-6; i<70; i++)
 		{
-			if(Random.Range(0, 1f) < 0.4f)
+			if(Random.Range(0, 1f) < 0.7f)
 			{
-				SpawnProp((float)i);
+				SpawnProp(i/2f);
 			}
 		}
 	}

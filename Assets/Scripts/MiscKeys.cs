@@ -20,13 +20,12 @@ public class MiscKeys : MonoBehaviour
 	{
 		if(Input.GetKeyDown("`"))
 			aa.enabled = !aa.enabled;
-		else if(Input.GetKeyDown("m"))
+		else if(audio && Input.GetKeyDown("m"))
 		{
 			if(audio.isPlaying)
 				audio.Pause();
 			else
 				audio.Play();
-
 		}
 	}
 }
