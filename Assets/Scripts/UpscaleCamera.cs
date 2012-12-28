@@ -42,6 +42,7 @@ public class UpscaleCamera : MonoBehaviour
 
 		GameObject go = new GameObject("RenderCam");
 		go.transform.position = new Vector3(0, -100f, 0);
+		go.transform.localEulerAngles = new Vector3(90f, 0, 0);
 
 
 		var ren = go.AddComponent<MeshRenderer>();
