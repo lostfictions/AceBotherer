@@ -14,6 +14,27 @@ public class UpscaleCamera : MonoBehaviour
 
 	void Start()
 	{
+		string unlitShader = 
+			@"
+				Shader ""Custom/Unlit Texture No Fog"" {
+					Properties {
+						_MainTex (""Base (RGB)"", 2D) = ""white"" {}
+					}
+
+					SubShader {
+						Tags { ""RenderType""=""Opaque"" }
+						LOD 100
+						
+						Pass {
+							Fog { Mode Off }
+							Lighting Off
+							SetTexture [_MainTex] { combine texture } 
+						}
+					}
+				}
+			";
+
+
 		RenderTexture rt = new RenderTexture(Screen.width / ratio, Screen.height / ratio, 16);
 		rt.filterMode = FilterMode.Point;
 		
@@ -24,7 +45,7 @@ public class UpscaleCamera : MonoBehaviour
 
 
 		var ren = go.AddComponent<MeshRenderer>();
-		rtMat = new Material(Shader.Find("Unlit/Texture"));
+		rtMat = new Material(unlitShader);
 		rtMat.mainTexture = rt;
 		ren.sharedMaterial = rtMat;
 		
@@ -79,17 +100,17 @@ public class UpscaleCamera : MonoBehaviour
 		}
 		else if(Input.GetKeyDown("3"))
 		{
-			ratio = 3;
+			ratio = 4;
 			changed = true;
 		}
 		else if(Input.GetKeyDown("4"))
 		{
-			ratio = 4;
+			ratio = 8;
 			changed = true;
 		}
 		else if(Input.GetKeyDown("5"))
 		{
-			ratio = 5;
+			ratio = 16;
 			changed = true;
 		}
 
