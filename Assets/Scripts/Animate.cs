@@ -11,7 +11,8 @@ public class Animate : MonoBehaviour
 	
 	public int walkFrames = 2;
 	// const int additionalColumnFrames = 1;
-	public int frameWidth = 32;
+
+	// public int frameWidth = 32;
 	// public int frameHeight = 64;
 
 	float currentDelay;
@@ -23,10 +24,10 @@ public class Animate : MonoBehaviour
 		currentDelay = animationSpeed;
 
 
-		int columnCount = renderer.material.mainTexture.width / frameWidth;
+		// int columnCount = renderer.material.mainTexture.width / frameWidth;
 		// int rowCount = renderer.material.mainTexture.height / frameHeight;
 
-		textureScale = new Vector2(1.0f / columnCount, 1.0f);
+		textureScale = new Vector2(1.0f / walkFrames, 1.0f);
 		// textureScale = new Vector2(1.0f / columnCount, 1.0f / rowCount);
 
 		renderer.material.SetTextureScale("_MainTex", textureScale);

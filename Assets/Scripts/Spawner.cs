@@ -12,8 +12,8 @@ public class Spawner : MonoBehaviour
 	public Transform[] propPrefabs;
 	public float[] propSpawnWeights;
 
-	public float propChance = 0.7f;
-	public float propDelay = 0.9f;
+	public float propChance = 0.8f;
+	public float propDelay = 0.7f;
 
 	float propTimer;
 
@@ -35,11 +35,11 @@ public class Spawner : MonoBehaviour
 		propTimer = propDelay;
 
 		// for(int i=-6; i<35; i++)
-		for(int i=-6; i<70; i++)
+		for(int i=-6; i<140; i++)
 		{
-			if(Random.Range(0, 1f) < 0.7f)
+			if(Random.Range(0, 1f) < 0.75f)
 			{
-				SpawnProp(i/2f);
+				SpawnProp(i/4f);
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class Spawner : MonoBehaviour
 
 	void SpawnProp(float zpos)
 	{
-		int count = Random.Range(1, 3);
+		int count = Random.Range(1, 5);
 
 		for(int i=0; i<count; i++)
 		{
@@ -84,6 +84,10 @@ public class Spawner : MonoBehaviour
 			float xpos = Random.Range(0, 2) == 1 ? Random.Range(-10f, -1f) : Random.Range(1f, 10f);
 
 			Vector3 pos = new Vector3(xpos, 0, zpos);
+
+			//if it's colliding with something already there, just forget it.
+			if(Physics.CheckSphere(pos, 0.3f))
+				continue;
 
 			Transform toSpawn = null;
 			float weightVal = Random.Range(0, sumWeights);
