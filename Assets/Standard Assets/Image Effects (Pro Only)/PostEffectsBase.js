@@ -1,7 +1,7 @@
 
 #pragma strict
 
-@script ExecuteInEditMode
+// @script ExecuteInEditMode
 @script RequireComponent (Camera)
 
 class PostEffectsBase extends MonoBehaviour {	

@@ -13,7 +13,7 @@ public class MoveAce : MonoBehaviour
 
 	void Update()
 	{
-		float dx = Input.GetAxisRaw("Horizontal");
+		float dx = Input.GetAxis("Horizontal");
 
 		Vector3 pos = transform.position;
 

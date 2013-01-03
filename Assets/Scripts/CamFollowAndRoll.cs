@@ -13,6 +13,7 @@ public class CamFollowAndRoll : MonoBehaviour
 	public AnimationCurve sampleWeights;
 
 	public float maxPan = 1.7f;
+	public float rollFactor = 1f;
 
 	float[] positionSamples;
 	int indPositionSamples = 0;
@@ -59,12 +60,9 @@ public class CamFollowAndRoll : MonoBehaviour
 		positionSamples[indPositionSamples] = target.position.x.Clamp(-maxPan, maxPan);
 
 		Vector3 rot = transform.localEulerAngles;
-		rot.z = dX * sampleCount;
+		rot.z = dX * sumOfWeights * rollFactor;
+		rot.y = dX * sumOfWeights * rollFactor;
 		transform.localEulerAngles = rot;
 	}
 
-	void LateUpdate()
-	{
-
-	}
 }
