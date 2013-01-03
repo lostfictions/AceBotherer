@@ -9,7 +9,7 @@ public class MoveAce : MonoBehaviour
 {
 	public float moveSpeed = 2f;
 
-	const float maxX = 1.7f;
+	public float maxX = 1.7f;
 
 	void Update()
 	{
