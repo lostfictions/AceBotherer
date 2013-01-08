@@ -46,6 +46,7 @@ Shader "Custom/FadeNearCamera"
 				half4 frag(v2f i) : COLOR
 				{
 					half4 texcol = tex2D(_MainTex, i.uv);
+					// texcol.a = min(clamp(39.0 - i.dist, 0, 1.0), texcol.a);
 					texcol.a = min(texcol.a, i.dist);
 					return texcol;
 				}
