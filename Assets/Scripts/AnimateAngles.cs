@@ -23,10 +23,13 @@ public class AnimateAngles : MonoBehaviour
 	int currentFrame;
 	Vector2 textureScale;
 
+	MoveAce moveAce;
+
 	void Start()
 	{
-		currentDelay = animationSpeed;
+		moveAce = GetComponent<MoveAce>();
 
+		currentDelay = animationSpeed;
 
 		int columnCount = renderer.material.mainTexture.width / frameWidth;
 		int rowCount = renderer.material.mainTexture.height / frameHeight;
@@ -46,7 +49,7 @@ public class AnimateAngles : MonoBehaviour
 			currentDelay = animationSpeed;
 		}
 
-		float dX = camTransform.position.x - transform.position.x + Input.GetAxis("Horizontal");
+		float dX = camTransform.position.x - transform.position.x + moveAce.SteeringForce;
 
 		int xOffset = 2;
 
