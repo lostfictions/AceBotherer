@@ -49,7 +49,12 @@ public class AnimateAngles : MonoBehaviour
 			currentDelay = animationSpeed;
 		}
 
-		float dX = camTransform.position.x - transform.position.x + moveAce.SteeringForce;
+		//commented version combines both player input AND camera delta from
+		//sprite positioning in determining sprite's angle
+		//float dX = camTransform.position.x - transform.position.x + moveAce.SteeringForce;
+
+		//current version just uses player input
+		float dX = moveAce.SteeringForce;
 
 		int xOffset = 2;
 

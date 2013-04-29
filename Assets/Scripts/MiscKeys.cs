@@ -20,7 +20,7 @@ public class MiscKeys : MonoBehaviour
 	{
 		if(Input.GetKeyDown("`"))
 			aa.enabled = !aa.enabled;
-		else if(audio && Input.GetKeyDown("m"))
+		else if(Input.GetKeyDown("m") && audio)
 		{
 			if(audio.isPlaying)
 				audio.Pause();
