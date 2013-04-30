@@ -17,7 +17,7 @@ public class SpawnerManual : MonoBehaviour
 
 	void Start()
 	{
-		props = new List<Transform>(propGroup.childCount);
+		props = new List<Transform>(propGroup.childCount + 5);
 
 		foreach(Transform c in propGroup)
 			props.Add(c);
@@ -32,6 +32,11 @@ public class SpawnerManual : MonoBehaviour
 			pos.z -= Time.deltaTime * scrollSpeed;
 			prop.position = pos;
 		}
+	}
+
+	public void AddProp(Transform toAdd)
+	{
+		props.Add(toAdd);
 	}
 
 }
