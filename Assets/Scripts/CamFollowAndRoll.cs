@@ -15,6 +15,8 @@ public class CamFollowAndRoll : MonoBehaviour
 	public float maxPan = 1.7f;
 	public float rollFactor = 1f;
 
+	public bool applyNoise = true;
+
 	//Perlin position-noise params
 	public float noiseVertDxMultiplier = 10f;
 	public float noiseVertConstMultiplier = 0f;
@@ -63,14 +65,22 @@ public class CamFollowAndRoll : MonoBehaviour
 		pos.x = weightedSum / sumOfWeights;
 		float dX = pos.x - lastX;
 
-
-		float noiseVert = (dX * noiseVertDxMultiplier + noiseVertConstMultiplier) * (Mathf.PerlinNoise(0f, Time.time * noiseVertTimeScale) - 0.5f);
-		pos.y = 1f + noiseVert;
+		if(applyNoise)
+		{
+			//calculate and apply y-axis noise (no easing)
+			float noiseVert = (dX * noiseVertDxMultiplier + noiseVertConstMultiplier) * (Mathf.PerlinNoise(0f, Time.time * noiseVertTimeScale) - 0.5f);
+			pos.y = 1f + noiseVert;
+		}
 
 		transform.position = pos;
 
-		float noiseHoriz = (dX * noiseHorizDxMultiplier + noiseHorizConstMultiplier) * (Mathf.PerlinNoise(Time.time * noiseHorizTimescale, 0.0f) - 0.5f);
-
+		float noiseHoriz = 0;
+		if(applyNoise)
+		{
+			//calculate and apply x-axis noise (eased)
+			noiseHoriz = (dX * noiseHorizDxMultiplier + noiseHorizConstMultiplier) * (Mathf.PerlinNoise(Time.time * noiseHorizTimescale, 0.0f) - 0.5f);
+		}
+		
 		indPositionSamples = (indPositionSamples + 1) % sampleCount;
 		positionSamples[indPositionSamples] = target.position.x.Clamp(-maxPan, maxPan) + noiseHoriz;
 
