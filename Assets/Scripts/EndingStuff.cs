@@ -33,6 +33,8 @@ public class EndingStuff : MonoBehaviour
 		camfollow = GetComponent<CamFollowAndRoll>();
 		camfollow.applyNoise = false;
 
+		audio.volume = 0;
+
 		movement.enabled = false;
 
 		camFade.enabled = true;
@@ -40,7 +42,14 @@ public class EndingStuff : MonoBehaviour
 		Vector3 targetPos = cam.position;
 		Vector3 startPos = cam.position + Vector3.forward * -3f;
 
-		Waiters.Interpolate(2f, f => camFade.material.color = new Color(0, 0, 0, 1f - f))
+		Waiters.Wait(2f)
+			.ThenInterpolate(5f, f => audio.volume = Easing.EaseInOut(f, EaseType.Sine) );
+
+		Waiters.Interpolate(4f, f =>
+			{
+				float e = Easing.EaseIn(f, EaseType.Quad);
+				camFade.material.color = new Color(0, 0, 0, 1f - e);
+			})
 			.Then( () => camFade.enabled = false);
 
 		Waiters.Interpolate(6f, f => cam.position = Vector3.Lerp(startPos, targetPos, Easing.EaseInOut(f, EaseType.Quad)))
@@ -80,6 +89,7 @@ public class EndingStuff : MonoBehaviour
 				.Then( ()=> endingAce.material.SetTextureOffset("_MainTex", new Vector2(0.5f, 0)) )
 				.ThenWait(7f)
 				.ThenInterpolate(2f, f => camFade.material.color = new Color(0, 0, 0, f))
+				.Then( () => camfollow.applyNoise = false )
 				.ThenWait(1.2f)
 				.ThenInterpolate(1f, f => {
 					endTextFade1.material.color = Color.Lerp(Color.clear, Color.white, Easing.EaseIn(f, EaseType.Quintic));
