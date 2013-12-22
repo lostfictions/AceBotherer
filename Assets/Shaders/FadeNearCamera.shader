@@ -16,7 +16,7 @@ Shader "Custom/FadeNearCamera"
 		Pass
 		{
 			CGPROGRAM
-				#pragma exclude_renderers xbox360
+				#pragma exclude_renderers d3d11 xbox360
 				#pragma vertex vert
 				#pragma fragment frag
 				#pragma fragmentoption ARB_precision_hint_fastest
